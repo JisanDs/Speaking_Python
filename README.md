@@ -54,4 +54,4 @@ This repo contains:
 
 Let the journey continue — one line, one bug, one breakthrough at a time.
 
-🧑‍💻 Jisan Shadowmoor
+🧑‍💻 Jisan
