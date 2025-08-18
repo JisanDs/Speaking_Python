@@ -31,7 +31,6 @@ remove_duplicates(["apple", "banana", "apple"]) ➞ ["apple", "banana"]
 # print(remove_duplicates(["apple", "banana", "apple"]))
 
 
-
 """ 🧪 **Problem 2: Clean Up String**
 
 📌 **Task:**
@@ -60,8 +59,6 @@ clean_text("Python is fun!!!") ➞ "Python is fun"
 # print(clean_text("Python is fun!!!"))
 
 
-
-
 """ ⚒️ **Problem 3: Micro Project – Shopping List Builder**
 
 📌 **Task:**
@@ -77,15 +74,19 @@ build_shopping_list("milk, eggs, bread, milk") ➞ ['Milk', 'Eggs', 'Bread']
 💡 **Hint:** Use `.split(',')`, `.strip()`, `.capitalize()`
 ⏱️ **Target Time:** 15 minutes"""
 
-# def build_shopping_list(s):
-#     split_s = s.split(",")
-#     lst = []
-#     for s in split_s:
-#         lst.append(s.strip().capitalize())
-#     return list(set(lst))
+def build_shopping_list(s):
+    items = s.split(",")
+    seen = []
+    for item in items:
+        cleaned = item.strip().capitalize()
+        if cleaned not in seen:
+            seen.append(cleaned)
+    return seen
 
-# print(build_shopping_list("milk, eggs, bread, milk"))
-# print(build_shopping_list("milk, eggs, eggs, bread, eggs, milk"))
+print(build_shopping_list("milk, eggs, bread, milk"))
+print(build_shopping_list("milk, eggs, eggs, bread, eggs, milk"))
+
+
 
 """ ✅ Bonus Idea (Optional):
 
@@ -97,13 +98,10 @@ python
 unique_vowel_count("education") ➞ 5
 unique_vowel_count("sky") ➞ 0"""
 
-# def unique_vowel_count(word):
-#     vowels = ["a", "e", "i", "o", "u"]
-#     count = 0
-#     for char in word:
-#         if char in vowels:
-#             count += 1
-#     return count
+def unique_vowel_count(word):
+    vowels = set("aeiou")
+    return len(set(word.lower()) & vowels)
 
-# print(unique_vowel_count("education"))
-# print(unique_vowel_count("sky"))
+print(unique_vowel_count("education"))
+print(unique_vowel_count("sky"))
+print(unique_vowel_count("cooperation"))
