@@ -144,3 +144,53 @@ def load_students(filename):
 
 save_students("students.txt", ["Jisan|20|93", "Rafi|19|83"])
 print(load_students("students.txt"))
+
+
+"""⚒️ Mini Project – Student Management System (OOP + File)
+
+📌 Task:
+Build a StudentManager class that can:
+
+add a student (add_student(name, age, grade))
+list all students (list_students())
+compute average grade (average_grade())
+save to file (save(filename)) and load from file (load(filename))
+
+📎 Example usage:
+
+mgr = StudentManager()
+mgr.add_student("Jisan",20,85)
+mgr.add_student("Rafi",19,72)
+mgr.list_students()
+mgr.average_grade() ➞ 78.5
+mgr.save("students.txt")
+
+
+💡 Hint:
+Internally keep a list of Student objects. Reuse save_students / load_students functions from Problem 4."""
+
+
+class StudentManager:
+    def add_student(self, name, age, grade):
+        self.name = name
+        self.age = age
+        self.grade = grade
+
+        with open("students.txt", "a") as f:
+            f.write(f"{self.name}|{self.age}|{self.grade}\n")
+
+    def students_list(self):
+        try:
+            with open("students.txt", "r") as f:
+                data = f.readlines()
+                students_list = []
+                for student in data:
+                    nag = student.replace("\n", "").split("|")
+                    students_list.append((f"Student{nag[0], nag[1], nag[2]}"))
+                print(students_list)
+                return students_list
+        except FileNotFoundError:
+            print("File Not Foound")
+
+    def average_grade():
+        return 
