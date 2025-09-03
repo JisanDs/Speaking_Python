@@ -29,8 +29,8 @@ Handle the case when no arguments are given (return None or an informative messa
 #         d = {
 #             "sum":sum(args),
 #             "avg":sum(args) / len(args),
-#             "max":max(list(args)),
-#             "min":min(list(args))
+#             "max":max(args),
+#             "min":min(args)
 #         }
 
 #         return d
@@ -54,11 +54,11 @@ greet("Jisan", greeting="Hi", title="Mr.") ➞ "Hi, Mr. Jisan!"
 Check for title in kwargs and prepend it if present. Use default greeting when none provided."""
 
 # def greet(name, greeting="Hello", **kwargs):
-#     if not kwargs:
-#         return f"{greeting}, {name}!"
-#     else:
-#         for title in kwargs.values():
-#             return f"{greeting}, {title} {name}!"
+#     title = kwargs.get("title", "")
+#     if title:
+#         return f"{greeting}, {title} {name}!"
+#     return f"{greeting}, {name}!"
+    
 
 # print(greet("Jisan"))
 # print(greet("Jisan", greeting="Hi", title="Mr."))
@@ -95,10 +95,7 @@ Use __init__ to set attributes. Keep grade numeric."""
 #         print(f"Name: {self.name}, Age: {self.age}, Grade: {self.grade}")
 
 #     def is_passed(self):
-#         if self.grade > 60:
-#             print(True)
-#         else:
-#             print(False)
+#         return self.grade >= 40
 
 # s = Student("Jisan", 20, 85)
 # s.get_details()
@@ -131,6 +128,7 @@ def save_students(filename, students_list):
             f.write(f"{student}\n")
 
 def load_students(filename):
+    students_list = []
     try:
         with open(filename, "r") as f:
             data = f.readlines()
@@ -140,10 +138,11 @@ def load_students(filename):
                 students_list.append((f"Student{nag[0], nag[1], nag[2]}"))
             return students_list
     except FileNotFoundError:
-        return "File Not Foound"
+        return []
+    return students_list
 
-save_students("students.txt", ["Jisan|20|93", "Rafi|19|83"])
-print(load_students("students.txt"))
+# save_students("students.txt", ["Jisan|20|93", "Rafi|19|83"])
+# print(load_students("students.txt"))
 
 
 """⚒️ Mini Project – Student Management System (OOP + File)
@@ -170,27 +169,99 @@ mgr.save("students.txt")
 Internally keep a list of Student objects. Reuse save_students / load_students functions from Problem 4."""
 
 
-class StudentManager:
-    def add_student(self, name, age, grade):
+class Student:
+    def __init__(self, name, age, grade):
         self.name = name
         self.age = age
         self.grade = grade
 
-        with open("students.txt", "a") as f:
-            f.write(f"{self.name}|{self.age}|{self.grade}\n")
+    def get_detalis(self):
+        return f"Name: {self.name}, Age: {self.age}, Grade: {self.grade}"
+    
+def save_students(filename, students_list):
+    with open(filename, "w") as f:
+        for student in students_list:
+            f.write(f"{student.name}|{student.age}|{student.grade}\n")
 
-    def students_list(self):
-        try:
-            with open("students.txt", "r") as f:
-                data = f.readlines()
-                students_list = []
-                for student in data:
-                    nag = student.replace("\n", "").split("|")
-                    students_list.append((f"Student{nag[0], nag[1], nag[2]}"))
-                print(students_list)
-                return students_list
-        except FileNotFoundError:
-            print("File Not Foound")
+def load_students(filename):
+    students_list = []
+    try:
+        with open(filename, "r") as f:
+            for line in f:
+                name, age, grade = line.strip().split("|")
+                students_list.append(Student(name, int(age), int(grade)))
+            return students_list
+    except FileNotFoundError:
+        return []
+    return students_list
+class StudentManager:
+    def __init__(self):
+        self.students = []
 
-    def average_grade():
-        pass 
+    def add_student(self, name, age, grade):
+        self.students.append(Student(name, age, grade))
+
+    def list_students(self):
+        for student in self.students:
+            print(student.get_detalis())
+
+    def average_grade(self):
+        if not self.students:
+            return 0
+        return sum(s.grade for s in self.students) / len(self.students)
+    
+    def save(self, filename):
+        save_students(filename, self.students)
+
+    def load(self, filename):
+        self.students = load_students(filename)
+
+
+mgr = StudentManager()
+mgr.add_student("Jisan",20,85)
+mgr.add_student("Rafi",19,72)
+mgr.list_students()
+mgr.average_grade()
+mgr.save("students.txt")
+mgr.save("updata.txt")
+
+
+"""🐞 Debugging Task – Fix the Code (OOP gotcha: class vs instance attribute)
+
+❌ Wrong Code:
+
+class School:
+    students = []
+
+    def add_student(self, name):
+        self.students.append(name)
+
+s1 = School()
+s2 = School()
+s1.add_student("A")
+s2.add_student("B")
+print(s1.students)  # ➞ ["A", "B"]
+print(s2.students)  # ➞ ["A", "B"]
+
+
+✅ Expected Behavior:
+Each School() instance should have its own students list.
+print(s1.students) ➞ ["A"]
+print(s2.students) ➞ ["B"]
+
+👉 Fix it: move students into __init__ as an instance attribute (self.students = [])."""
+# ✅ Fixed code:
+
+# class School:
+#     def __init__(self):
+#         self.students = []
+
+#     def add_student(self, name):
+#         self.students.append(name)
+
+# s1 = School()
+# s2 = School()
+# s1.add_student("A")
+# s2.add_student("B")
+# print(s1.students)  
+# print(s2.students)  
