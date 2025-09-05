@@ -194,6 +194,7 @@ def load_students(filename):
     except FileNotFoundError:
         return []
     return students_list
+
 class StudentManager:
     def __init__(self):
         self.students = []
