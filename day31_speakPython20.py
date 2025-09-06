@@ -12,13 +12,13 @@ Write a recursive function that takes an integer and returns the sum of its digi
 
 Input: 1234 → Output: 10 (1+2+3+4)"""
 
-"""def sum_digits(d):
+def sum_digits(d):
     if d // 10 == 0:
         return d
     return (d % 10) + sum_digits(d // 10)
     
 print(sum_digits(565))
-print(sum_digits(1234))"""
+print(sum_digits(1234))
 
 
 """2. Palindrome Check (Recursive)
@@ -27,7 +27,7 @@ Write a recursive function to check if a string is a palindrome.
 # Input: "madam" → True
 # Input: "python" → False"""
 
-"""def is_palindrom(s):
+def is_palindrom(s):
     if len(s) <= 1:
         return True
     elif s[0] != s[-1]:
@@ -35,7 +35,7 @@ Write a recursive function to check if a string is a palindrome.
     return is_palindrom(s[1:-1])
     
 print(is_palindrom("madam"))
-print(is_palindrom("python"))"""
+print(is_palindrom("python"))
 
 
 """⚡ Other Concepts (2 problems)
@@ -43,13 +43,10 @@ print(is_palindrom("python"))"""
 3. Lambda + Filter
 Use lambda and filter() to filter only the even numbers from a list."""
 
-"""nums =  [5, 12, 17, 18, 24, 32]
+nums =  [5, 12, 17, 18, 24, 32]
 
-is_even = lambda x: x % 2 == 0
-even = filter(is_even, nums)
-
-for n in even:
-    print(n)"""
+even = list(filter(lambda x: x % 2 == 0, nums))
+print(even)
     
     
 """4. JSON File Handling
