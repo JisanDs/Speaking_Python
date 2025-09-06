@@ -57,27 +57,27 @@ Save a Python dictionary into a file in JSON format, then load it back and print
 
 import json
 
-#student = {"name": "Jisan", "age": 20, "skills": ["Python", "Git", "OOP"]}
+student = {"name": "Jisan", "age": 20, "skills": ["Python", "Git", "OOP"]}
 
 def write_json(filename, obj, indent=2):
     with open(filename, "w") as f:
         json.dump(obj, f, indent=indent)
         
-"""write_json("student.json", student)
+write_json("student.json", student)
 
 # this for testing
-write_json("test.json", student, indent=4)"""
+write_json("test.json", student, indent=4)
 
 def read_json(filename):
     with open(filename, "r") as f:
         return json.load(f)
         
-"""data = read_json("student.json")
+data = read_json("student.json")
 print(data)
 
 print(data.get("name"))
 print(data.get("age"))
-print(data.get("skills")[2])"""
+print(data.get("skills")[2])
 
 
 """🛠️ Debugging Task
@@ -93,12 +93,12 @@ def fact(n):
 print(fact(5))  # Expected: 120"""
 
     # fixed code:
-"""def fact(n):
+def fact(n):
     if n == 0:
         return 1
     return n * fact(n-1)
 
-print(fact(5))"""
+print(fact(5))
 
 
 """📂 Mini Project
@@ -116,12 +116,12 @@ total_expense() → calculate the total amount
 Save each entry in JSON format in a file."""
 
 
-class ExpensesTracker:
+class ExpenseTracker:
     def __init__(self):
         self.exp_amount = []
         self.expenses = {}
         
-    def add_expenses(self, name, amount):
+    def add_expense(self, name, amount):
         self.expenses.update({name: amount})
         # i alrady writed this function 'write_json()' in problam 4
         write_json("expenses.json", self.expenses)
@@ -139,11 +139,11 @@ class ExpensesTracker:
     def total_expenses(self):
         return sum(self.exp_amount)
 
-ts = ExpensesTracker()
-ts.add_expenses("cake", 50)
-ts.add_expenses("cokies", 45)
-ts.add_expenses("biskit", 34)
-ts.add_expenses("speed", 25)
-ts.add_expenses("coffi", 275)
+ts = ExpenseTracker()
+ts.add_expense("cake", 50)
+ts.add_expense("cokies", 45)
+ts.add_expense("biskit", 34)
+ts.add_expense("speed", 25)
+ts.add_expense("coffi", 275)
 ts.view_expenses()
 print(ts.total_expenses())
