@@ -13,6 +13,8 @@ Write a recursive function to calculate the GCD of two numbers.
 
 def gcd(n, n2):
     pass
+
+print(18 % 6.33)
     
     
 """Power Function (Recursive)
@@ -97,7 +99,48 @@ search_contact(name) → search by name and display details
 
 Store all contacts in a file called contacts.json."""
 
-import json
+# import json
 
-dict = {"h": 3, "u": 7}
-print(json.dumps(dict))
+# class ContactBook:
+#     def __init__(self):
+#         self.contact = {}
+
+#     def add_contact(self, name, phone):
+#         self.contact.update({name: phone})
+
+#         with open("contacts.json", "w") as f:
+#             json.dump(self.contact, f, indent=2)
+
+#     # extra fetur:
+#     def remove_contact(self, name):
+#         if name in self.contact:
+#             self.contact.pop(name)
+
+#             with open("contacts.json", "w") as f:
+#                 json.dump(self.contact, f, indent=2)
+#         else:
+#             print(f"{name} not found!")
+
+
+#     def view_contents(self):
+#         with open("contacts.json", "r") as f:
+#             data = json.load(f)
+
+#         print("Your contacts: ")
+#         for name, phone in data.items():
+#             print(f"{name}: {phone}")
+
+#     def search_contact(self, name):
+#         if name in self.contact:
+#             print(self.contact.get(name))
+#         else:
+#             print(f"{name} not found!")
+
+# ts = ContactBook()
+# ts.add_contact("Jisan", 234555)
+# ts.add_contact("Ji", 2345598)
+# ts.add_contact("Sonnic", 2345587)
+# ts.view_contents()
+# ts.remove_contact("Jisan")
+# ts.view_contents()
+# ts.search_contact("Ji")
