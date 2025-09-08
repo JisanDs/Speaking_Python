@@ -11,10 +11,13 @@ Write a recursive function to calculate the GCD of two numbers.
 
 # Input: gcd(48, 18) → Output: 6"""
 
-def gcd(n, n2):
-    pass
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
 
-print(18 % 6.33)
+print(gcd(48, 18))
+print(gcd(4, 2))
     
     
 """Power Function (Recursive)
@@ -99,48 +102,61 @@ search_contact(name) → search by name and display details
 
 Store all contacts in a file called contacts.json."""
 
-# import json
+import json
 
-# class ContactBook:
-#     def __init__(self):
-#         self.contact = {}
+class ContactBook:
+    def __init__(self, filename="contacts.json"):
+        self.filename = filename
+        self.contacts = self.load_contacts()
 
-#     def add_contact(self, name, phone):
-#         self.contact.update({name: phone})
+    def open_contacts(self):
+        with open("contacts.json", "r", encoding="utf-8") as f:
+            return json.load(f)
 
-#         with open("contacts.json", "w") as f:
-#             json.dump(self.contact, f, indent=2)
+    def load_contacts(self):
+        try:
+            with open("contacts.json", "r", encoding="utf-8") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return {}
+        
+    def save_contact(self):
+        with open("contacts.json", "w", encoding="utf-8") as f:
+            json.dump(self.contacts, f, indent=2)
 
-#     # extra fetur:
-#     def remove_contact(self, name):
-#         if name in self.contact:
-#             self.contact.pop(name)
+    def add_contact(self, name, phone):
+        self.contacts.update({name: phone})
+        self.save_contact()
 
-#             with open("contacts.json", "w") as f:
-#                 json.dump(self.contact, f, indent=2)
-#         else:
-#             print(f"{name} not found!")
+    # extra fetur:
+    def remove_contact(self, name):
+        if name in self.contacts:
+            self.contacts.pop(name)
+            self.save_contact()
+        else:
+            print(f"{name} not found!")
 
 
-#     def view_contents(self):
-#         with open("contacts.json", "r") as f:
-#             data = json.load(f)
+    def view_contents(self):
+        data = self.open_contacts()
 
-#         print("Your contacts: ")
-#         for name, phone in data.items():
-#             print(f"{name}: {phone}")
+        print("Your contacts: ")
+        for name, phone in data.items():
+            print(f"{name}: {phone}")
 
-#     def search_contact(self, name):
-#         if name in self.contact:
-#             print(self.contact.get(name))
-#         else:
-#             print(f"{name} not found!")
+    def search_contact(self, name):
+        data = self.open_contacts()
 
-# ts = ContactBook()
-# ts.add_contact("Jisan", 234555)
-# ts.add_contact("Ji", 2345598)
-# ts.add_contact("Sonnic", 2345587)
-# ts.view_contents()
-# ts.remove_contact("Jisan")
-# ts.view_contents()
-# ts.search_contact("Ji")
+        if name in data:
+            print(f"{name}: {data.get(name)}")
+        else:
+            print(f"{name} not found!")
+
+ts = ContactBook()
+ts.add_contact("Jisan", 234555)
+ts.add_contact("Ji", 2345598)
+ts.add_contact("Sonnic", 2345587)
+ts.view_contents()
+ts.remove_contact("Jisan")
+ts.view_contents()
+ts.search_contact("Ji")
