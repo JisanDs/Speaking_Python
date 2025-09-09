@@ -49,23 +49,37 @@ B = {3, 4, 5, 6}
 # Intersection → {3, 4}  
 # Difference (A - B) → {1, 2}"""
 
-A = {1, 2, 3, 4}  
-B = {3, 4, 5, 6}
+# A = {1, 2, 3, 4}  
+# B = {3, 4, 5, 6}
 
-def main():
-    #return A.union(B)
-    #return A.intersection(B)
-    return differance(A, B)
-print(main())
+# def main():
+#     print(A.union(B))
+#     print(A.intersection(B))
+#     print(A.difference(B))
 
+# main()
+
+# manual just for fun:
+# Difference (A - B) → {1, 2}
+# def set_diff(a, b):
+#     diff = set()
+#     for item in a:
+#         if item not in b:
+#             diff.add(item)
+#     return diff
+# print(set_diff(A, B))
 
 """4. CSV File Handling
-Write a program to save a list of dictionaries into a CSV file, and then read it back.
+Write a program to save a list of dictionaries into a CSV file, and then read it back."""
 
 students = [
     {"name": "Jisan", "age": 20},
     {"name": "Nova", "age": 21}
-]"""
+]
+import csv
+
+
+
 
 
 
