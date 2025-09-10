@@ -69,12 +69,29 @@ B = {3, 4, 5, 6}
 """4. CSV File Handling
 Write a program to save a list of dictionaries into a CSV file, and then read it back."""
 
+import csv
+
 students = [
     {"name": "Jisan", "age": 20},
     {"name": "Nova", "age": 21}
 ]
-import csv
 
+fields = ["name", "age"]
+
+def csv_dictwriter(dict, fields, filename="csv_data.csv"):
+    with open(filename, "w", newline="") as cf:
+        write = csv.DictWriter(cf, fieldnames=fields)
+        write.writeheader()
+        write.writerows(students)
+
+csv_dictwriter(students, fields)
+csv_dictwriter(students, fields, filename="ts.csv")
+
+with open("csv_data.csv", "r", newline="") as cf:
+    # readata = csv.DictReader(cf)
+    readata = csv.reader(cf)
+    for data in readata:
+        print(data)
 
 
 """🛠️ Debugging Task
