@@ -25,16 +25,13 @@ Write a recursive function to calculate the sum of elements in a list.
 
 # Input: [1, 2, 3, 4, 5] → Output: 15"""
 
+# def sum_list(lst):
+#     if not lst:
+#         return 0
+#     return lst[0] + sum_list(lst[1:])
 
-
-"""def lst_sum(lst):
-    if len(lst) == 0:
-        return lst[0]
-    return lst[0] + lst_sum(lst[0:])
-
-
-print(lst_sum([1, 2, 3, 4, 5]))"""
-
+# print(sum_list([1, 2, 3, 4, 5]))
+# print(sum_list([1, 3, 4]))
 
 """⚡ Other Concepts (2 problems)
 
@@ -80,9 +77,6 @@ import csv
 
 
 
-
-
-
 """🛠️ Debugging Task
 
 5. Method Bug
@@ -98,6 +92,26 @@ p = Person("Jisan")
 p.show()   # Expected output: Jisan"""
 
 
+"""class Person:
+    def __init__(self, name):
+        name = name   # ❌ bug
+    def show(self):
+        print(self.name)
+
+p = Person("Jisan")
+p.show()   # Expected output: Jisan """
+
+
+# fixed code:
+# class Person:
+#     def __init__(self, name):
+#         self.name = name
+        
+#     def show(self):
+#         print(self.name)
+
+# p = Person("Jisan")
+# p.show()
 
 
 """📂 Mini Project
