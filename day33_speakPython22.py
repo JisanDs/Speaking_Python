@@ -87,7 +87,7 @@ def csv_dictwriter(dict, fields, filename="csv_data.csv"):
 csv_dictwriter(students, fields)
 csv_dictwriter(students, fields, filename="ts.csv")
 
-with open("csv_data.csv", "r", newline="") as cf:
+with open("csv_data.csv", "r", encoding="utf-8", newline="") as cf:
     # readata = csv.DictReader(cf)
     readata = csv.reader(cf)
     for data in readata:
