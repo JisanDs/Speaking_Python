@@ -69,29 +69,29 @@ B = {3, 4, 5, 6}
 """4. CSV File Handling
 Write a program to save a list of dictionaries into a CSV file, and then read it back."""
 
-import csv
+# import csv
 
-students = [
-    {"name": "Jisan", "age": 20},
-    {"name": "Nova", "age": 21}
-]
+# students = [
+#     {"name": "Jisan", "age": 20},
+#     {"name": "Nova", "age": 21}
+# ]
 
-fields = ["name", "age"]
+# fields = ["name", "age"]
 
-def csv_dictwriter(dict, fields, filename="csv_data.csv"):
-    with open(filename, "w", newline="") as cf:
-        write = csv.DictWriter(cf, fieldnames=fields)
-        write.writeheader()
-        write.writerows(students)
+# def csv_dictwriter(dict, fields, filename="csv_data.csv"):
+#     with open(filename, "w", newline="") as cf:
+#         write = csv.DictWriter(cf, fieldnames=fields)
+#         write.writeheader()
+#         write.writerows(students)
 
-csv_dictwriter(students, fields)
-csv_dictwriter(students, fields, filename="ts.csv")
+# csv_dictwriter(students, fields)
+# csv_dictwriter(students, fields, filename="ts.csv")
 
-with open("csv_data.csv", "r", encoding="utf-8", newline="") as cf:
-    # readata = csv.DictReader(cf)
-    readata = csv.reader(cf)
-    for data in readata:
-        print(data)
+# with open("csv_data.csv", "r", encoding="utf-8", newline="") as cf:
+#     # readata = csv.DictReader(cf)
+#     readata = csv.reader(cf)
+#     for data in readata:
+#         print(data)
 
 
 """🛠️ Debugging Task
@@ -146,3 +146,55 @@ search_student(name) → show grades of a specific student
 average_grade(name) → calculate average grade of that student
 
 Store everything in a file called grades.json."""
+
+import json
+
+
+class GradeManager:
+    def __init__(self):
+        self.data = self.load_data()
+
+    def load_data(self):
+        try:
+            with open("students_data.json", encoding="utf-8") as jsf:
+                return json.load(jsf)
+        except FileNotFoundError:
+            return {}
+        
+    def save_data(self):
+        with open("students_data.json", "w", encoding="utf-8") as jsf:
+            json.dump(self.data, jsf, indent=2)
+
+    def add_grade(self, name, subject, grade):
+        if name not in self.data:
+            self.data[name] = {}
+        self.data[name][subject] = grade
+        self.save_data()
+
+    def view_grades(self):
+        students = self.load_data()
+        for student in students.values():
+            for name, grade in student.items():
+                print(grade)
+
+
+students = {
+    "jisan": {
+        "math": 89
+    },
+    "robart": {
+        "cham": 98
+    },
+    "sonnic": {
+        "math": 87
+    }
+}
+
+name = "jisna"
+for names in students.keys():
+    if name == names:
+        for student in students.values():
+            for subject, grade in student.items():
+                print(grade)
+else:
+    print("not")
