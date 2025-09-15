@@ -61,8 +61,37 @@ Create two sets and perform: union, intersection, and difference. Print the resu
 From a list of numbers, create a new list that contains only the numbers divisible by 3.
 
 # Input: [1,2,3,4,5,6,7,8,9] → Output: [3,6,9]"""
-nums = [1,2,3,4,5,6,7,8,9]
 
-div_3 = [n for n in nums if n % 3 == 0]
-print(div_3)
+# nums = [1,2,3,4,5,6,7,8,9]
 
+# div_3 = [n for n in nums if n % 3 == 0]
+# print(div_3)
+
+
+"""🛠️ Debugging Task
+
+OOP Inheritance Bug
+The following code has a bug in inheritance. Fix it.
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        self.breed = breed
+
+d = Dog("Tommy", "German Shepherd")
+print(d.name, d.breed)  # Expected: Tommy German Shepherd """
+
+# fixed code:
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+d = Dog("Tommy", "German Shepherd")
+print(d.name, d.breed)
