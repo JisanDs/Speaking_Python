@@ -36,10 +36,33 @@ Input: "python" → Output: "nohtyp" """
 
 Set Operations
 Create two sets and perform: union, intersection, and difference. Print the results."""
+# test1 = {3, 4, 5, 6}
+# test2 = {9, 8, 7, 6, 4}
 
+# def main():
+#     print(f"union: {set_union(test1, test2)}")
+#     print(f"intersection : {set_inter(test1, test2)}")
+#     print(f"difference:  {set_diff(test1,test2)}")
+
+
+# def set_union(set1, set2):
+#     return set1.union(set2)
+
+# def set_inter(set1, set2):
+#     return set1.intersection(set2)
+
+# def set_diff(set1, set2):
+#     return set1.difference(set2)
+
+# main()
 
 
 """List Comprehension with Condition
 From a list of numbers, create a new list that contains only the numbers divisible by 3.
 
 # Input: [1,2,3,4,5,6,7,8,9] → Output: [3,6,9]"""
+nums = [1,2,3,4,5,6,7,8,9]
+
+div_3 = [n for n in nums if n % 3 == 0]
+print(div_3)
+
