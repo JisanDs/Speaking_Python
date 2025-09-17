@@ -84,14 +84,74 @@ d = Dog("Tommy", "German Shepherd")
 print(d.name, d.breed)  # Expected: Tommy German Shepherd """
 
 # fixed code:
-class Animal:
-    def __init__(self, name):
-        self.name = name
+# class Animal:
+#     def __init__(self, name):
+#         self.name = name
 
-class Dog(Animal):
-    def __init__(self, name, breed):
-        super().__init__(name)
-        self.breed = breed
+# class Dog(Animal):
+#     def __init__(self, name, breed):
+#         super().__init__(name)
+#         self.breed = breed
 
-d = Dog("Tommy", "German Shepherd")
-print(d.name, d.breed)
+# d = Dog("Tommy", "German Shepherd")
+# print(d.name, d.breed)
+
+
+"""📂 Mini Project
+
+Task Manager (OOP + File Handling)
+Build a small Task Manager program.
+
+Create a class TaskManager.
+
+Features:
+
+add_task(task) → add a new task (save to JSON file)
+view_tasks() → show all tasks
+remove_task(task) → remove a task
+
+Save tasks persistently in a file tasks.json."""
+
+import json
+from FileUtilites import load_json # this is my wone library
+
+class TaskManager:
+    def __init__(self):
+        self.data = load_json("tasks.json")
+    
+    def save_task(self):
+        with open("tasks.json", "w") as file:
+            json.dump(self.data, file, indent=2)
+
+    def add_task(self, task):
+        next_key = str(len(self.data) + 1)
+        self.data[next_key] = task
+        self.save_task()
+
+    def view_tasks(self):
+        if not self.data:
+            print("No tasks available")
+            return
+        
+        print("Current tasks: ")
+        for n, task in self.data.items():
+            print(f"{n}. {task}")
+
+    def remove_task(self, number):
+        number = str(number)
+
+        if number in self.data:
+            del self.data[number]
+            self.save_task()
+            print("Task is removed")
+        else:
+            print(f"Error: Task number {number} not found.")
+
+tm = TaskManager()
+tm.add_task("homework")
+tm.add_task("python")
+print("befor")
+tm.view_tasks()
+tm.remove_task(1)
+print("after")
+tm.view_tasks()
