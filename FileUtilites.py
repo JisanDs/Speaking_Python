@@ -13,6 +13,6 @@ def load_json(filename):
 def save_json(obj, filename):
     try:
         with open(filename, "w", encoding="utf-8") as file:
-            json.dump(obj, filename)
+            json.dump(obj, file, indent=2)
     except UnicodeDecodeError:
         pass
