@@ -101,7 +101,7 @@ class Student:
         print(f"Name: {self.name}, Marks: {self.marks}")
 
 s = Student("Jisan", 90)
-s.display()
+# s.display()
 
 
 """📂 Mini Project – Task Manager
@@ -116,3 +116,50 @@ remove_task(title) → delete a task by title
 mark_done(title) → mark a task as completed"""
 
 # All tasks should be saved in tasks.json (you can use your FileUtilites library).
+from FileUtilites import load_json, save_json
+class TaskManager:
+    def __init__(self, file="tasks.jaon"):
+        self.file = file
+        self.tasks = load_json(self.file)
+
+    def add_task(self, title, description):
+        if title not in self.tasks:
+            self.tasks[title] = description
+            save_json(self.tasks, self.file)
+        else:
+            print("Task alredy exist!")
+
+    def view_tasks(self):
+        if not self.tasks:
+            print("Empty")
+        else:
+            for title, des in self.tasks.items():
+                print(f"{title}: {des}")
+    
+    def remove_task(self, title):
+        if title in self.tasks:
+            del self.tasks[title]
+            save_json(self.tasks, self.file)
+        else:
+            print("Invalid Title")
+
+    def mark_done(self, title):
+        if title in self.tasks:
+            if "✓" not in self.tasks[title]:
+                self.tasks[title] = str(self.tasks[title] + "✓")
+                save_json(self.tasks, self.file)
+            else:
+                print("Alredy mark done")
+        else:
+            print("Invalid Title")
+
+
+
+tm = TaskManager()
+tm.add_task("learn python", "learn python form cs50p")
+tm.add_task("learn bash", "learn bash from chatgpt")
+tm.view_tasks()
+tm.remove_task("learn python")
+tm.view_tasks()
+tm.mark_done("learn bash")
+tm.view_tasks()
