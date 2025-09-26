@@ -156,10 +156,10 @@ class TaskManager:
 
 
 tm = TaskManager()
-tm.add_task("learn python", "learn python form cs50p")
-tm.add_task("learn bash", "learn bash from chatgpt")
-tm.view_tasks()
-tm.remove_task("learn python")
-tm.view_tasks()
-tm.mark_done("learn bash")
-tm.view_tasks()
+# tm.add_task("learn python", "learn python form cs50p")
+# tm.add_task("learn bash", "learn bash from chatgpt")
+# tm.view_tasks()
+# tm.remove_task("learn python")
+# tm.view_tasks()
+# tm.mark_done("learn bash")
+# tm.view_tasks()
