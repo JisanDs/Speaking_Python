@@ -118,7 +118,7 @@ mark_done(title) → mark a task as completed"""
 # All tasks should be saved in tasks.json (you can use your FileUtilites library).
 from FileUtilites import load_json, save_json
 class TaskManager:
-    def __init__(self, file="tasks.jaon"):
+    def __init__(self, file="tasks.json"):
         self.file = file
         self.tasks = load_json(self.file)
 
