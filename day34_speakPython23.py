@@ -146,7 +146,7 @@ total_expense() → show total spending
 
 Save data persistently in expenses.json."""
 
-# import FileUtilites as fu
+# import file_utilites as fu
 
 
 # class ExpenseTracker:

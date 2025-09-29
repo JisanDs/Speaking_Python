@@ -140,7 +140,7 @@ Features:
 
 All notes should be saved in notes.json (you can use your FileUtilites library)."""
 
-from fileutillites import save_json, load_json
+from file_utilites import save_json, load_json
 
 
 class SimpleNotes:
