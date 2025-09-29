@@ -65,11 +65,11 @@ nst_lst = [
     [7, 2, 1, 0]
 ]
 
-"""print(unpack_nested_lst.__doc__)
+# print(unpack_nested_lst.__doc__)
 
-print(unpack_nested_lst(nested_list))
-print(unpack_nested_lst(nst))
-print(unpack_nested_lst(nst_lst))"""
+# print(unpack_nested_lst(nested_list))
+# print(unpack_nested_lst(nst))
+# print(unpack_nested_lst(nst_lst))
 # ---
 
 """4. Dictionary Merge
@@ -96,8 +96,8 @@ dict2 = {"b": 3, "c": 4}
 test1 = {"math": 87, "cham": 76}
 test2 = {"phy": 93, "cs": 99}
 
-print(int_dict_marger(dict1, dict2))
-print(int_dict_marger(test1, test2))
+# print(int_dict_marger(dict1, dict2))
+# print(int_dict_marger(test1, test2))
 
 
 # ---------------------------------------------------
@@ -185,7 +185,7 @@ class SimpleNotes:
 
 sn = SimpleNotes()
 
-"""sn.add_note("Test", "This is a note class")
+sn.add_note("Test", "This is a note class")
 sn.add_note("Learn Regex", "Learn regex from cs50p")
 sn.add_note("Bash Script", "Bash script is use to creat autometion")
 sn.view_notes()
@@ -197,4 +197,4 @@ sn.search_note("Learn Regex")
 
 sn.view_notes()
 sn.clear_notes()
-sn.view_notes()"""
+sn.view_notes()
