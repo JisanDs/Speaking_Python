@@ -26,12 +26,11 @@ Input: str_len("python")
 Output: 6"""
 
 def str_len(s):
-    if len(s) <= 0:
-        return s
-    return  str_len(s[0:len(s)])
+    if s == "":
+        return 0
+    return  1 + str_len(s[1:])
     
-#print(str_len("jisan"))
-
+# print(str_len("jisan"))
 
 """⚡ Other Concepts (2 problems)
 
@@ -60,10 +59,33 @@ inv = {v: k for k, v in students.items()}
 
 
 """🛠️ Debugging Task
-
 Buggy code:
 
-class Rectangle: def __init__(self, width, height): self.width = width height = height def area(self): return self.width * self.height r = Rectangle(5, 10) print(r.area()) # Expected: 50 """
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        height = height
+    
+    def area(self):
+        return self.width * self.height
+
+r = Rectangle(5, 10)
+print(r.area())   # Expected: 50
+
+👉 Fix the error so that it works correctly. """
+
+# Fixed code:
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def area(self):
+        return self.width * self.height
+
+r = Rectangle(5, 10)
+# print(r.area())
+
 
 """👉 Fix the error so that it works correctly.
 
@@ -89,26 +111,42 @@ class ExpenseTracker:
         self.expenses = load_json(self.file)
         
     def add_expense(self, category, amount):
-        count = 0
-        if count not in self.expenses:
-            self.expenses[count] = {}
-            self.expenses[count]["category"] = category
-            self.expenses[count]["amount"] = amount
-            save_json(self.expenses, self.file)
-        else:
-            print("alrady exist")
+        count = str(len(self.expenses) + 1)
+        self.expenses[count] = {"category": category, "amount": amount}
+        save_json(self.expenses, self.file)
+
             
     def view_expenses(self):
-        pass
-        
+        if self.expenses:
+            for main in self.expenses.values():
+                print(f"Category: {main["category"]}, Amount: {main["amount"]}")
+        else:
+            print("Empty")
+
     def total_expenses(self):
-        pass
+        if self.expenses:
+            total = sum([main["amount"] for main in self.expenses.values()])
+            print(f"Total amount: {total}")
+        else:
+            print("Empty")
         
     def remove_expense(self, category):
-        pass
+        found = False
+        for key, value in list(self.expenses.items()):
+            if value["category"] == category:
+                found = key
+                break
+        if found:
+            del self.expenses[key]
+            save_json(self.expenses, self.file)
+            print(f"Category removed: {category}")
+        else:
+            print("Category not foune")
 
-et = ExpenseTracker()
-et.add_expense("frout", 89)
-et.add_expense("game", 6799)
-
-print(type(et))
+# test:
+# et = ExpenseTracker()
+# et.add_expense("frout", 89)
+# et.add_expense("game", 6799)
+# et.view_expenses()
+# et.total_expenses()
+# et.remove_expense("game")
