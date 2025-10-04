@@ -248,9 +248,9 @@ class PasswordManager:
 # small project
 
 def main():
+    pm = PasswordManager()
+    
     while True:
-        pm = PasswordManager()
-
         print("___Menu Bar___")
         print("1. Add")
         print("2. Remove")
