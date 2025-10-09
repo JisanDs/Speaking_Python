@@ -93,9 +93,15 @@ Output: 55
 
 Hint: Use a dictionary memo = {} to store computed results."""
 
+def fib(n):
+    memo = {}
+    if n <= 1:
+        return n
+    memo[n] = fib(n - 1) + fib(n - 2)
+    return memo[n]
 
 
-# print(fib(10))
+print(fib(10))
 
 
 """🧠 Bonus Challenge (Optional)
