@@ -72,9 +72,16 @@ Write a recursive function that flattens a deeply nested list into a single list
 Input: [1, [2, [3, [4, 5]]]]
 Output: [1, 2, 3, 4, 5]"""
 
+def flatten_nest_lst(nest_lst):
+    flat_lst = []
+    for n in nest_lst:
+        if isinstance(n, list):
+            flat_lst.extend(flatten_nest_lst(n))
+        else:
+            flat_lst.append(n)
+    return flat_lst
 
-
-# print(flatten_nst_lst([1, [2, [3, [4, 5]]]]))
+# print(flatten_nest_lst([1, [2, [3, [4, 5]]]]))
 
 
 """4️⃣ Fibonacci Memoization
