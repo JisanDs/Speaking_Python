@@ -40,9 +40,29 @@ Write a recursive function that prints numbers in words (1 → one, 2 → two, e
 Input: 123
 Output: "one two three" """
 
+def num_to_word(n):
+    if n == 0:
+        return n
+    
+    word_map = {
+        0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 
+        5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine"
+    }
+
+    last_digit = n % 10
+    remain = n // 10
+    result = num_to_word(remain)
+    current_word = word_map[last_digit]
+
+    if result:
+        return result +" "+ current_word
+    else:
+        return current_word
 
 
-# print(number_to_word(1234567890))
+# print(num_to_word(1234567890))
+# for n in range(1, 10):
+#     print(num_to_word(n))
 
 """🔁 Part 2 – Advanced Recursion
 3️⃣ Flatten Nested List
