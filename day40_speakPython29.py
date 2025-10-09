@@ -104,6 +104,57 @@ def fib(n):
 # print(fib(10))
 
 
+"""🧩 Part 3 – OOP + Real-World Task
+5️⃣ Task Manager App (Mini Project)
+
+Create a simple Task Manager class that allows:
+
+add_task(task_name)
+remove_task(task_name)
+view_tasks()
+mark_done(task_name)
+
+📁 Save all tasks in a JSON file (tasks.json)
+🟢 Each task should have two fields:"""
+
+from fu import save_json, load_json
+
+class TaskManager:
+    def __init__(self, file="tasks.json"):
+        self.file = file
+        self.tasks = load_json(file)
+
+    def add_tasks(self, u_title, task):
+        # this code check task in tasks or not.
+        for value in self.tasks.values():
+            for title, task in value.items():
+                # if task alredy exist return simple massage and return.
+                if title == u_title:
+                    print("task alredy exist")
+                    return
+        # if task not exist in tasks so this code add task
+        count = str(len(self.tasks) + 1)
+        self.tasks[count] = {}
+        self.tasks[count][u_title] = task
+        self.tasks[count]["done"] = False
+        save_json(self.tasks, self.file)
+
+    def remove_task(self, u_title):
+        for value in self.tasks.values():
+            for n, (title, task) in value.items():
+                if title == u_title:
+                    del self.tasks[n][title]
+                    save_json(self.tasks, self.file)
+                    return
+
+
+
+tm = TaskManager()
+tm.add_tasks("learn bash", "from youtube")
+tm.add_tasks("learn python", "from cs50p")
+tm.add_tasks("learn linux cmd", "chatgpt")
+tm.remove_task("learn linux cmd")
+
 """🧠 Bonus Challenge (Optional)
 6️⃣ String Compression
 
@@ -131,27 +182,4 @@ def compress_char(s):
     return result
 
 
-print(compress_char("aaabbccdaa"))
-
-
-"""🧩 Part 3 – OOP + Real-World Task
-5️⃣ Task Manager App (Mini Project)
-
-Create a simple Task Manager class that allows:
-
-add_task(task_name)
-remove_task(task_name)
-view_tasks()
-mark_done(task_name)
-
-📁 Save all tasks in a JSON file (tasks.json)
-🟢 Each task should have two fields:"""
-
-from fu import save_json, load_json
-
-class TaskManager:
-    def __init__(self, file):
-        self.file = file
-        self.tasks = load_json(file)
-
-
+# print(compress_char("aaabbccdaa"))
