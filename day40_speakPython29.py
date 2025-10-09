@@ -101,7 +101,7 @@ def fib(n):
     return memo[n]
 
 
-print(fib(10))
+# print(fib(10))
 
 
 """🧠 Bonus Challenge (Optional)
@@ -114,9 +114,24 @@ Output: "a3b2c2d1a2"
 
 (Hint: use a loop and count consecutive characters)"""
 
+def compress_char(s):
+    if not s:
+        return None
+    
+    count = 1
+    result = ""
+    for i in range(1, len(s)):
+        if s[i] == s[i - 1]:
+            count += 1
+        else:
+            result += s[i-1] + str(count)
+            count = 1
+
+    result += s[-1] + str(count)
+    return result
 
 
-# print(compress_char("aaabbccdaa"))
+print(compress_char("aaabbccdaa"))
 
 
 """🧩 Part 3 – OOP + Real-World Task
