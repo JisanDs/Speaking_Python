@@ -93,11 +93,12 @@ Output: 55
 
 Hint: Use a dictionary memo = {} to store computed results."""
 
-def fib(n):
-    memo = {}
+def fib(n, memo={}):
+    if n in memo:
+        return memo[n]
     if n <= 1:
         return n
-    memo[n] = fib(n - 1) + fib(n - 2)
+    memo[n] = fib(n - 1, memo) + fib(n - 2, memo)
     return memo[n]
 
 
@@ -112,7 +113,6 @@ Create a simple Task Manager class that allows:
 add_task(task_name)
 remove_task(task_name)
 view_tasks()
-mark_done(task_name)
 
 📁 Save all tasks in a JSON file (tasks.json)
 🟢 Each task should have two fields:"""
@@ -124,36 +124,56 @@ class TaskManager:
         self.file = file
         self.tasks = load_json(file)
 
-    def add_tasks(self, u_title, task):
-        # this code check task in tasks or not.
-        for value in self.tasks.values():
-            for title, task in value.items():
-                # if task alredy exist return simple massage and return.
-                if title == u_title:
-                    print("task alredy exist")
-                    return
-        # if task not exist in tasks so this code add task
+    def add_tasks(self, task, status=False):
+        if any(t["task"] == task for t in self.tasks.values()):
+            print("Task already exists")
+            return
         count = str(len(self.tasks) + 1)
-        self.tasks[count] = {}
-        self.tasks[count][u_title] = task
-        self.tasks[count]["done"] = False
+        self.tasks[count] = {"task": task, "done": status}
         save_json(self.tasks, self.file)
 
-    def remove_task(self, u_title):
-        for value in self.tasks.values():
-            for n, (title, task) in value.items():
-                if title == u_title:
-                    del self.tasks[n][title]
-                    save_json(self.tasks, self.file)
-                    return
+    def remove_task(self, task):
+        found = False
+        for key in list(self.tasks.keys()):
+            if task == self.tasks[key]["task"]:
+                found = True
+                del self.tasks[key]
+                print("Task removed")
+                break
+        save_json(self.tasks, self.file)
+        if not found:
+            print("Invalid task: not exist")
+
+    def remove_all(self):
+        if self.tasks:
+            self.tasks = {}
+            save_json(self.tasks, self.file)
+        else:
+            print("Tasks file empty")
+
+    def view_task(self):
+        if self.tasks:
+            print("Your Task's:")
+            for n, data in enumerate(self.tasks.values(), start=1):
+                print(f"{n}. {data["task"]}")
+        else:
+            print("Tasks file empty")
+
+def main():
+    tm = TaskManager()
+    tm.add_tasks("learn bash")
+    tm.add_tasks("learn python")
+    tm.add_tasks("learn linux cmd")
+    tm.view_task()
+
+    tm.remove_task("learn bash")
+    tm.remove_task("learn")
+    tm.view_task()
 
 
+# if __name__ == "__main__":
+#     main()
 
-tm = TaskManager()
-tm.add_tasks("learn bash", "from youtube")
-tm.add_tasks("learn python", "from cs50p")
-tm.add_tasks("learn linux cmd", "chatgpt")
-tm.remove_task("learn linux cmd")
 
 """🧠 Bonus Challenge (Optional)
 6️⃣ String Compression
