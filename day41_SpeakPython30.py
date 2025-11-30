@@ -94,9 +94,12 @@ Output: [('Bob', 92), ('Alice', 85), ('Charlie', 78)]
 
 ✅ Use sorted() with key"""
 
+def sort_by_score(d: dict) -> list:
+    result = []
+    work_dict = [{'name': name, 'score': score} for name, score in d.items()]
+    for data in sorted(work_dict, key=lambda data: data['score'], reverse=True):
+        result.append((data['name'],data['score']))
+    return result
 
 scores = {"Alice": 85, "Bob": 92, "Charlie": 78}
-lst = []
-
-for name, score in scores:
-    pass
+print(sort_by_score(scores))
