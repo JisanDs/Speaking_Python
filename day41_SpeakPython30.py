@@ -1,3 +1,6 @@
+import json
+
+
 """🔁 Part 1: Algorithmic Thinking (New Patterns)
 1️⃣ Two Sum (Optimized Logic)
 
@@ -25,15 +28,18 @@ for n in nums:
     if n < target:
         pass
 
-words = ["hi", "hello", "cat", "python", "ok"]
 
-result = {}
+def group_by_length(lst: list) -> dict:
+    result = {}
+    for s in lst:
+        if result.get(len(s)):
+            result[len(s)].append(s)
+        else:
+            result.update({len(s): [s]})
+    return result
 
-for word in words:
-    if result.get(len(word)):
-        result[len(word)].append(word)
-    else:
-        result.update({len(word): [word]})
 
-
-print(result)
+# words = ["hi", "hello", "cat", "python", "ok"]
+words = ["hi", "by", "hello", "group", "name", "cat", "python", "ok"]
+rus = group_by_length(words)
+print(json.dumps(rus, indent=2))
