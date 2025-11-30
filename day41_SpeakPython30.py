@@ -29,6 +29,23 @@ for n in nums:
         pass
 
 
+"""⚡ Part 2: Data Processing Logic
+3️⃣ Group Words by Length
+Given a list of words, group them by length.
+
+Input: words = ["hi", "hello", "cat", "python", "ok"]
+
+Output:
+
+{
+  2: ["hi", "ok"],
+  3: ["cat"],
+  5: ["hello"],
+  6: ["python"]
+}
+
+✅ Focus: dictionary + iteration"""
+
 def group_by_length(lst: list) -> dict:
     result = {}
     for s in lst:
@@ -41,5 +58,45 @@ def group_by_length(lst: list) -> dict:
 
 # words = ["hi", "hello", "cat", "python", "ok"]
 words = ["hi", "by", "hello", "group", "name", "cat", "python", "ok"]
-rus = group_by_length(words)
-print(json.dumps(rus, indent=2))
+# rus = group_by_length(words)
+# print(json.dumps(rus, indent=2))
+
+
+"""2️⃣ Valid Parentheses
+
+Write a function that checks whether a string of brackets is valid.
+
+Input: "()[]{}"
+Output: True
+Invalid example: "(]"
+
+👉 Use stack logic (list)"""
+
+def valid_prntes(s: str) -> bool:
+    stack = ["()", "[]", "{}"]
+    status = False
+
+    for paren in stack:
+        if paren in s:
+            status = True
+    return status
+
+# print(valid_prntes("()"))
+# print(valid_prntes("(}"))
+# print(valid_prntes("()[]{}"))
+
+
+"""4️⃣ Sort Dictionary by Value (Descending)
+
+Given: scores = {"Alice": 85, "Bob": 92, "Charlie": 78}
+
+Output: [('Bob', 92), ('Alice', 85), ('Charlie', 78)]
+
+✅ Use sorted() with key"""
+
+
+scores = {"Alice": 85, "Bob": 92, "Charlie": 78}
+lst = []
+
+for name, score in scores:
+    pass
