@@ -102,4 +102,44 @@ def sort_by_score(d: dict) -> list:
     return result
 
 scores = {"Alice": 85, "Bob": 92, "Charlie": 78}
-print(sort_by_score(scores))
+#print(sort_by_score(scores))
+
+
+""" Part 3: Debugging + Clean Code
+
+5️⃣ Bug Fix + Refactor
+
+Buggy Code:
+
+class User:
+    def __init__(self, name, age):
+        name = name
+        self.age = age
+
+    def show(self):
+        print("Name:", self.name, "Age:", self.age)
+
+u = User("Jisan", 20)
+u.show()
+
+👉 Fix it
+👉 Make code clean & professional"""
+
+
+# dbuggy code:
+
+class User:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def show(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+    def __str__(self):
+        # str method is my proposing approach
+        return f"Name: {self.name}, Age: {self.age}"
+
+
+u = User("Jisan", 20)
+print(u)
