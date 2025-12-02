@@ -16,3 +16,4 @@ def save_json(obj, filename):
             json.dump(obj, file, indent=2)
     except UnicodeDecodeError:
         pass
+

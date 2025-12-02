@@ -1,4 +1,5 @@
-import json
+import fu
+import sys
 
 
 """🔁 Part 1: Algorithmic Thinking (New Patterns)
@@ -141,5 +142,84 @@ class User:
         return f"Name: {self.name}, Age: {self.age}"
 
 
-u = User("Jisan", 20)
-print(u)
+#u = User("Jisan", 20)
+#print(u)
+
+
+"""📂 Part 4: Mini Project – Student Result Manager
+
+🎓 Student Result System (OOP + JSON)
+
+Build a small system to manage student results.
+
+Features:
+
+  add_student(name, marks)
+  view_students()
+  topper() → highest marks
+  remove_student(name)
+
+
+📁 Data must be stored in:
+
+students.json
+
+✅ You can use your FileUtilites library
+✅ Store data like:
+
+{
+  "Jisan": 89,
+  "Alex": 92
+}"""
+
+
+class Students:
+    def __init__(self, file_name="students.json"):
+        self.file_name = file_name
+        self.db = fu.load_json(self.file_name)
+
+    def add_student(self, name, mark):
+        found = False
+        for student in self.db:
+            if student['name'].lower() == name.lower():
+                found = True
+                break
+
+        if found:
+            sys.stderr.write(f"Student: {name} alrady exists\n")
+            return
+        student = {"name": name, "mark": mark}
+        self.db.append(student)
+        fu.save_json(self.db, self.file_name)
+
+    def view_students(self):
+        print("____STUDENTS____:")
+        for st in self.db:
+            print(f"Name: {st['name']}, Mark: {st['mark']}")
+
+    def topper(self):
+        for st in sorted(self.db, key=lambda st: st['mark'], reverse=True):
+            print(f"Name: {st['name']}, Mark: {st['mark']}")
+            break
+
+    def remove_student(self, name):
+        found = False
+        for i, st in enumerate(self.db):
+            if st['name'] == name:
+                self.db.pop(i)
+                found = True
+                fu.save_json(self.db, self.file_name)
+                break
+
+        if not found:
+            sys.stderr.write(f"{name} Not found in students databeas\n")
+
+
+st = Students()
+#st.add_student("Jisan", 90)
+#st.add_student("Sonnic", 78)
+#st.add_student("Nova", 89)
+#st.add_student("Json", 66)
+#st.view_students()
+st.remove_student("Jisan")
+st.topper()
