@@ -212,14 +212,12 @@ class Students:
                 break
 
         if not found:
-            sys.stderr.write(f"{name} Not found in students databeas\n")
+            sys.stderr.write(f"ExistError: {name} Not found in students databeas\n")
+
+    def count_students(self):
+        students = len(self.db)
+        print(f"Students in databace: {students}")
 
 
 st = Students()
-#st.add_student("Jisan", 90)
-#st.add_student("Sonnic", 78)
-#st.add_student("Nova", 89)
-#st.add_student("Json", 66)
-#st.view_students()
-st.remove_student("Jisan")
-st.topper()
+st.count_students()
